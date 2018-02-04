@@ -1,0 +1,20 @@
+var canvas = document.getElementById("slate");
+var ctx = canvas.getContext('2d');
+var circle = false;
+canvas.addEventListener("click",function(e)){
+    if(circle = false){
+	drawcircle(e)
+    }
+    else(draw);
+}
+ctx.fillStyle = "red";
+var drawcircle= function(e){
+    ctx.beginPath()
+    ctx.arc(e.clientX, e.clientY, 20,0, 2 * Math.PI);
+    ctx.fill();
+}
+var drawsquare= function(e){
+    ctx.beginPath()
+    ctx.rect(e.clientX, e.clientY, 40, 40);
+    ctx.fill();
+}
