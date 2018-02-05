@@ -3,31 +3,37 @@ var ctx = canvas.getContext('2d');
 var circle = false;
 var trigger = document.getElementById("trigger");
 var clear = document.getElementById("clear");
+ctx.beginPath();
 
 trigger.addEventListener("click", function(){
     circle = !circle;
 })
 
-clear.addEventListener("click", function(){
+clear.addEventListener("click", function(e){
     ctx.clearRect(0,0,500,500);
+    ctx.beginPath();
 })
     
-canvas.addEventListener("click",function(){
+canvas.addEventListener("click",function(e){
     if(circle){
-	drawcircle();
+	drawcircle(e);
     }
     else{
-	drawsquare();
+	drawsquare(e);
     };
 })
 ctx.fillStyle = "red";
-var drawcircle= function(){
-    ctx.beginPath()
-    ctx.arc(event.clientX, event.clientY, 20,0, 2 * Math.PI);
+var drawcircle= function(e){
+    ctx.lineTo(e.offsetX - 20, e.offsetY - 20);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(e.offsetX - 20, e.offsetY - 20, 20,0, 2 * Math.PI);
     ctx.fill();
 }
-var drawsquare= function(){
-    ctx.beginPath()
-    ctx.rect(event.clientX, event.clientY, 40, 40);
+var drawsquare= function(e){
+    ctx.lineTo(e.offsetX - 20, e.offsetY - 20);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.rect(e.offsetX - 20, e.offsetY - 20, 40, 40);
     ctx.fill();
 }
